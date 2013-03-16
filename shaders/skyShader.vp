@@ -1,0 +1,12 @@
+#version 330
+in vec3 inCoords;
+
+out vec3 ray;
+
+uniform mat4 MVPMatrix;
+
+void main()
+{
+  ray = normalize(inCoords);
+  gl_Position = MVPMatrix * vec4(inCoords,1.0f);
+}

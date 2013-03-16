@@ -1,0 +1,23 @@
+//TexturedMeshShader.vp
+#version 330
+
+
+in vec3 inCoords;
+in vec3 inNormal;
+in vec2 inTexCoords;
+
+out vec2 outTex;
+out float lightingFactor;
+
+uniform mat4 MVPMatrix;
+uniform vec3 lightingVector;
+
+
+void main()
+{
+
+  lightingFactor = max(dot(inNormal,lightingVector),0.0f);
+  if(lightingFactor > 1.0f) lightingFactor = 1.0f;
+  outTex = inTexCoords;
+  gl_Position = MVPMatrix * vec4(inCoords,1.0f);
+}

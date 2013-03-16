@@ -1,0 +1,39 @@
+//heightfield.vp
+#version 330
+
+in vec3 inCoords;
+in vec3 inNormals;
+in vec2 inTexCoords;
+
+out vec3 position;
+out vec3 normal;
+out vec2 outTex;
+out float height;
+
+
+uniform mat4 MVPMatrix;
+uniform mat3 normalMatrix;
+
+
+uniform sampler2D heightField;
+uniform sampler2D normalMap;
+
+
+uniform float texScaleWidth;
+uniform float texScaleHeight;
+
+uniform float textureOffset;
+
+
+
+void main()
+{
+  outTex = inTexCoords;
+
+  height = inCoords.y;
+  normal = inNormals;
+
+  gl_Position = MVPMatrix * vec4(inCoords,1.0);
+
+  position = gl_Position.xyz;
+}

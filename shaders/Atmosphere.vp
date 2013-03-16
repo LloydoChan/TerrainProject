@@ -1,0 +1,12 @@
+//atmosphere.vp
+
+#version 330
+
+in vec3 inCoords;
+
+out vec2 texCoord;
+
+void main(){
+  gl_Position = vec4(inCoords,1.0f);
+  texCoord = (inCoords.xy/2.0f) + 0.5f;
+}

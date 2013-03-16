@@ -1,0 +1,11 @@
+#version 330
+
+in vec3 inCoords;
+
+uniform mat4 MVPMatrix;
+uniform float size;
+uniform vec3 pos;
+
+void main(){
+  gl_Position = MVPMatrix * size * vec4(inCoords+pos,1.0);
+}

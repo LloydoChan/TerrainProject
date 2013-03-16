@@ -1,0 +1,10 @@
+#version 330
+//bounding box vertex shader
+
+in vec3 inCoords;
+uniform mat4 MVPMatrix;
+
+void main()
+{
+  gl_Position = MVPMatrix * vec4(inCoords,1.0); 
+}

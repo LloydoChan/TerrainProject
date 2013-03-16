@@ -1,0 +1,11 @@
+//TextShader.vp
+#version 330
+
+in vec4 inCoord;
+out vec2 texCoords;
+
+void main()
+{
+  gl_Position = vec4(inCoord.xy,0,1);
+  texCoords = inCoord.zw;
+}

@@ -1,0 +1,35 @@
+//TexturedMeshShader.vp
+#version 330
+
+in vec3 inCoords;
+in vec3 inNormals;
+in vec2 inTextures;
+
+out vec2 outTex;
+out float checkYVal;
+out vec2  lookupCoords;
+out float lightingFactor;
+
+uniform mat4 VPMatrix;
+uniform mat4 translation;
+uniform sampler2D heightMap;
+uniform float texScaleWidth;
+uniform float texScaleHeight;
+uniform vec3 lightingVector;
+
+uniform float textureOffset;
+
+void main()
+{
+  outTex = inTextures;
+  //get position from heightmap
+  //lookupCoords = vec2((position.x/2.0  + textureOffset) * texScaleWidth,
+    //                  (position.z/2.0 + textureOffset) * texScaleHeight);
+
+  vec4 newPos = translation * vec4(inCoords.x,inCoords.y,inCoords.z,1.0f);
+  checkYVal = newPos.y;
+
+  lightingFactor = max(dot(-lightingVector,inNormals),0.0);
+
+  gl_Position = VPMatrix  * newPos;
+}

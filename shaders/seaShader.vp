@@ -1,0 +1,32 @@
+//seaShader.vp
+#version 330
+
+in vec4 inCoords;
+
+uniform mat4 projMatrix;
+uniform mat4 viewMatrix;
+uniform mat4 reflectionMatrix;
+uniform vec4 boxExtents;
+
+uniform vec3 lightPos;
+
+out vec3 pos;
+out vec3 pixToEye;
+out vec3 pixToLight;
+out vec2 normalizedTex;
+out vec4 transformedTex;
+
+void main()
+{
+  pos = vec3(inCoords);
+
+  pixToLight = lightPos;
+
+  pixToEye = -vec3(viewMatrix * inCoords);
+
+  normalizedTex = (inCoords.xy - boxExtents.xy)/(boxExtents.xy - boxExtents.zw);
+
+  gl_Position =  projMatrix * viewMatrix * inCoords;
+
+  transformedTex = reflectionMatrix * inCoords;
+}
